@@ -1,0 +1,77 @@
+using System.Runtime.Serialization;
+
+namespace Shift.Legion.GvG.Common.Enums;
+
+public enum eContributionKey
+{
+	[EnumMember(Value = "-1")]
+	Invalid = -1,
+	[EnumMember(Value = "0")]
+	Claimed = 0,
+	[EnumMember(Value = "1")]
+	BossDamage = 1,
+	[EnumMember(Value = "2")]
+	REBossDamage = 2,
+	[EnumMember(Value = "3")]
+	KillNPCUnit = 3,
+	[EnumMember(Value = "4")]
+	REKillNPCUnit = 4,
+	[EnumMember(Value = "5")]
+	KillPlayerUnit = 5,
+	[EnumMember(Value = "6")]
+	BattleLossUnit = 6,
+	[EnumMember(Value = "7")]
+	HoldingScore = 7,
+	[EnumMember(Value = "8")]
+	Collecting = 8,
+	[EnumMember(Value = "9")]
+	ForgeAmplifier = 9,
+	[EnumMember(Value = "10")]
+	Purification = 10,
+	[EnumMember(Value = "11")]
+	GetTalentPoint = 11,
+	[EnumMember(Value = "12")]
+	FoodCost = 12,
+	[EnumMember(Value = "13")]
+	GetWigglewormPoint = 13,
+	[EnumMember(Value = "16")]
+	BuyForBattlePass = 16,
+	[EnumMember(Value = "17")]
+	MissionCampSide = 17,
+	[EnumMember(Value = "18")]
+	FlagShipReq = 18,
+	[EnumMember(Value = "19")]
+	FlagShipOEM = 19,
+	[EnumMember(Value = "21")]
+	IslandShareBonus = 21,
+	[EnumMember(Value = "22")]
+	IslandCollectingModelShareBonus = 22,
+	[EnumMember(Value = "23")]
+	GvGStoreOperation_Refresh = 23,
+	[EnumMember(Value = "24")]
+	PostOEMMission = 24,
+	[EnumMember(Value = "25")]
+	CreatePlayerCommand = 25,
+	[EnumMember(Value = "26")]
+	Jump = 26,
+	[EnumMember(Value = "27")]
+	FlagShipMission = 27,
+	[EnumMember(Value = "28")]
+	OpenBox = 28,
+	[EnumMember(Value = "29")]
+	SubmitShadowEnergy = 29,
+	[EnumMember(Value = "30")]
+	GvGStoreOperation_CommonStoneCost = 30,
+	[EnumMember(Value = "31")]
+	GvGStoreOperation_RareStoneCost = 31,
+	[EnumMember(Value = "32")]
+	Sweep = 32,
+	[EnumMember(Value = "33")]
+	BuySweep = 33,
+	[EnumMember(Value = "34")]
+	GvGStoreOperation_GuaranteedTicketCost = 34,
+	[EnumMember(Value = "35")]
+	BrawlEventAlive = 35,
+	[EnumMember(Value = "36")]
+	BrawlEventNotDead = 36
+}

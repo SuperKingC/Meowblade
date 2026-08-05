@@ -1,0 +1,9 @@
+using Entitas;
+using Entitas.CodeGeneration.Attributes;
+
+[Game]
+[Event(EventTarget.Self, EventType.Added, 0)]
+public sealed class AudioVolumeComponent : IComponent
+{
+	public int value;
+}

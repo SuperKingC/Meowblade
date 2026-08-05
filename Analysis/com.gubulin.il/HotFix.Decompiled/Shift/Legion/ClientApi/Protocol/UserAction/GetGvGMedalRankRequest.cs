@@ -1,0 +1,15 @@
+using ProtoBuf;
+
+namespace Shift.Legion.ClientApi.Protocol.UserAction;
+
+[ProtoContract]
+public class GetGvGMedalRankRequest : IRequestPacket, IPacketBody
+{
+	[ProtoMember(1)]
+	public string MedalId { get; set; }
+
+	[ProtoMember(99)]
+	public int MsgIndex { get; set; }
+
+	public int PacketId => PacketIds.USER_ACTION_GVGMEDALRANK_REQUEST;
+}

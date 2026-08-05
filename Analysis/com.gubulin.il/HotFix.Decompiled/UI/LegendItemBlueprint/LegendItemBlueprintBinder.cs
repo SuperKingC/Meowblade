@@ -1,0 +1,91 @@
+using FairyGUI;
+
+namespace UI.LegendItemBlueprint;
+
+public class LegendItemBlueprintBinder
+{
+	public static void BindAll()
+	{
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgaupt5ltfx", typeof(UI_btn_page));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgaz6v4c", typeof(UI_main_LegendItemIdentityConfirm));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgb8pv5ltdt", typeof(UI_com_OptionalBlueprintPopupInfolist));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgb8pv5ltdv", typeof(UI_btn_OptionalBlueprintAddAttribute));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgb8pv5ltdx", typeof(UI_com_OptionalBlueprintPopupPoplist));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgb8pv5ltdy", typeof(UI_btn_SelectLegendItem));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgb8pv5ltdz", typeof(UI_com_OptionalBlueprintAttSelList));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgb8pv5lte0", typeof(UI_com_ScrollOptionalBlueprint));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgb8pv5lte1", typeof(UI_com_OptionalBlueprintAttributeList));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgbpuh5ltg1", typeof(UI_content2));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgfevs5ltfu", typeof(UI_btn_Lock));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgh0te3q", typeof(UI_com_ForgeResultLeft));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgh0te3r", typeof(UI_com_ForgeResultRight));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgh0te3u", typeof(UI_com_Propetry1));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgi2xa37", typeof(UI_btn_CancelForge));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgi2xa38", typeof(UI_com_ItemCost));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgi2xa39", typeof(UI_com_Title));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgi2xa3a", typeof(UI_main_ShowForgeResult));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgi2xa3i", typeof(UI_com_FrameTreasure));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgi56w4a", typeof(UI_com_SelectForgeLegendItem));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqa13", typeof(UI_com_Scroll));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqa14", typeof(UI_com_ContentBottom));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqa15", typeof(UI_com_CostContent));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqa16", typeof(UI_com_Content));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqa17", typeof(UI_com_LegendItemCost));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqa19", typeof(UI_com_Entries));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqa1a", typeof(UI_com_Entry));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqa1b", typeof(UI_com_AllFx));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqar", typeof(UI_main_LegendItemBlueprintInfoPanel));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqas", typeof(UI_com_InfoDialog));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqat", typeof(UI_btn_forge));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqaw", typeof(UI_com_PreviewContent));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgjpqax", typeof(UI_com_Propetry));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgll2q5ltfd", typeof(UI_com_SelectForgeUniversalLegendItem));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcglxbt3y", typeof(UI_com_LegendItemPreview));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcglxbt3z", typeof(UI_com_LegendItemEntryPreview));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcglxbt40", typeof(UI_com_EntriesPreview));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcglxbt42", typeof(UI_com_Entry2));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcglxbt43", typeof(UI_com_Propetry4));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgm8v55ltfn", typeof(UI_com_SelectBlueprintPopupContent1));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgnpfy5lten", typeof(UI_btn_yes));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgnpfy5ltet", typeof(UI_btn_no));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgp29h5ltfi", typeof(UI_btn_reset));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgpqzh2p", typeof(UI_com_LegendItemForgeCost));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgpqzh2w", typeof(UI_com_LegendItem));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgpqzh2y", typeof(UI_main_LegendItemBlueprintSelect));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgpqzh30", typeof(UI_main_LegendItemEvoConfirm));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgpqzh31", typeof(UI_com_LegendItemEvoConfirm));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgpqzh32", typeof(UI_main_LegendItemBlueprintForgeConfirm));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgpqzh33", typeof(UI_com_LegendItemForgeConfirm));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgpqzh34", typeof(UI_com_ForgeConfirmCostItem));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgpw044b", typeof(UI_com_LegendItemIdentityConfirm));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgq0lt4e", typeof(UI_eff_LightRingYellow));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgqyyy4h", typeof(UI_btn_AttributeIcon));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgqyyy5ltdo", typeof(UI_main_SelectBlueprintPopup));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgqyyy5ltdp", typeof(UI_com_SelectBlueprintPopup));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgqz9p3v", typeof(UI_com_Propetry2));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgqz9p3w", typeof(UI_com_Entry1));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgqz9p3x", typeof(UI_com_Propetry3));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgr0qr5ltev", typeof(UI_dec_block01));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgr0qr5ltew", typeof(UI_dec_block03));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgr0qr5ltez", typeof(UI_dec_block02));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgr0qr5ltf1", typeof(UI_dec_block04));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgrtmo1d", typeof(UI_main_LegendItemBlueprintForge));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgrtmo1i", typeof(UI_dec_RobotBottom));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgrtmo1m", typeof(UI_dec_SmelterFrame));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgrtmo1q", typeof(UI_com_MainLegendItem));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgrtmo1x", typeof(UI_com_CostLegendItems));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgrtmo20", typeof(UI_dec_ForgeProgress));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgrtmo24", typeof(UI_dec_ForgeProgressFrame));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgrtmo28", typeof(UI_dec_SelectPopupTop));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgrtmo2a", typeof(UI_btn_ConfirmForgeLarge));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgsc145ltf6", typeof(UI_main_ObtainBlueprintPopup));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgt49p5ltdq", typeof(UI_main_OptionalBlueprintPopup));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgt49p5ltdr", typeof(UI_com_OptionalBlueprintPopup));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgt49p5ltds", typeof(UI_com_OptionalSelectPropertyBtn));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgtviv4d", typeof(UI_com_FxAndSet));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgtvyq5ltfb", typeof(UI_btn_AttributeIcon2));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgtvyq5ltfc", typeof(UI_btn_SelectLegendItem2));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcguad65lte2", typeof(UI_com_OptionalBlueprintAttributeListSub));
+		UIObjectFactory.SetPackageItemExtension("ui://h09dvkcgvual5lteu", typeof(UI_btn_Close));
+	}
+}

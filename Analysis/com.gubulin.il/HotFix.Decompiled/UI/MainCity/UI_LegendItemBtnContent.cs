@@ -1,0 +1,50 @@
+using FairyGUI;
+using FairyGUI.Utils;
+
+namespace UI.MainCity;
+
+public class UI_LegendItemBtnContent : GComponent
+{
+	public GImage n6;
+
+	public GImage n10;
+
+	public GImage n12;
+
+	public const string URL = "ui://j611zmymrv9zv43n";
+
+	public static string Name = "UI_LegendItemBtnContent";
+
+	public static string GetURL()
+	{
+		return "ui://j611zmymrv9zv43n";
+	}
+
+	public static UI_LegendItemBtnContent CreateInstance()
+	{
+		return (UI_LegendItemBtnContent)(object)UIPackage.CreateObject("MainCity", "LegendItemBtnContent");
+	}
+
+	public static UI_LegendItemBtnContent CreateInstance_ILRuntime()
+	{
+		//IL_0028: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0032: Expected O, but got Unknown
+		string full_name = typeof(UI_LegendItemBtnContent).FullName;
+		UIObjectFactory.SetPackageItemExtension("ui://j611zmymrv9zv43n", (GComponentCreator)(() => HotFixManager.Instance.appdomain.Instantiate<GComponent>(full_name, (object[])null)));
+		return CreateInstance();
+	}
+
+	public override void ConstructFromXML(XML xml)
+	{
+		//IL_0015: Unknown result type (might be due to invalid IL or missing references)
+		//IL_001f: Expected O, but got Unknown
+		//IL_002b: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0035: Expected O, but got Unknown
+		//IL_0041: Unknown result type (might be due to invalid IL or missing references)
+		//IL_004b: Expected O, but got Unknown
+		((GComponent)this).ConstructFromXML(xml);
+		n6 = (GImage)((GComponent)this).GetChild("n6");
+		n10 = (GImage)((GComponent)this).GetChild("n10");
+		n12 = (GImage)((GComponent)this).GetChild("n12");
+	}
+}

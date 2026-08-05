@@ -1,0 +1,23 @@
+using System.Collections.Generic;
+
+namespace GameDataEditor;
+
+public static class GDEMissionDataLoader
+{
+	public static Dictionary<string, GDEMissionData> Load(DataContainer dataContainer)
+	{
+		GDEMissionData.DC = dataContainer;
+		int num = dataContainer.DataMetaArray?.Count ?? 0;
+		if (num == 0)
+		{
+			return new Dictionary<string, GDEMissionData>();
+		}
+		Dictionary<string, GDEMissionData> dictionary = new Dictionary<string, GDEMissionData>(num);
+		foreach (KeyValuePair<string, List<int>> item in dataContainer.DataMetaArray)
+		{
+			List<int> value = item.Value;
+			dictionary.Add(item.Key, new GDEMissionData(value[0], value[1], value[2], value[3], value[4], value[5], value[6]));
+		}
+		return dictionary;
+	}
+}

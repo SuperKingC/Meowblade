@@ -1,0 +1,12 @@
+namespace Shift.Legion.ClientApi.RPC;
+
+public enum NetworkErrorTypes
+{
+	ERROR_OK,
+	ERROR_RPC_CONNECTION_TIMED_OUT,
+	ERROR_INVALID_TOKEN,
+	ERROR_TIMED_OUT,
+	ERROR_DENIED,
+	NETWORK_ISSUE,
+	ERROR_UNKNOWN
+}

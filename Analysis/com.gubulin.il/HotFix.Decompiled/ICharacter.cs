@@ -1,0 +1,3 @@
+public interface ICharacter : IView, IEventListener, IPositionListener, IRotationListener, IScaleListener, IAssetRemovedListener, IGameDestroyedListener, IShowGizmosListener, IUnitStatsListener, IShowHealthBarListener, IShowHealthBarRemovedListener, IShowCastingBarListener, IShowCastingBarRemovedListener, ICastingAbilityElapsedTimeListener, ISkeletonListener, IVisibleListener, IVisibleRemovedListener, IAnimationInitializedListener, ICollisionRadiusListener, IUnitScaleListener
+{
+}

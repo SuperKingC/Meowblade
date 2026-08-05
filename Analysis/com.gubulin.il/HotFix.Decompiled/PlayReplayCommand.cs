@@ -1,0 +1,8 @@
+using Entitas;
+using Shift.Legion.CodeGeneration.Attributes;
+
+[Command]
+[CommandFlag]
+public sealed class PlayReplayCommand : IComponent
+{
+}

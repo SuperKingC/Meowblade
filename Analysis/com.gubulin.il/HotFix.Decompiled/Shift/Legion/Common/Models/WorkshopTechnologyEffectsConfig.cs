@@ -1,0 +1,37 @@
+using Shift.Legion.Common.Managers;
+
+namespace Shift.Legion.Common.Models;
+
+public class WorkshopTechnologyEffectsConfig : BuildingTechnologyEffectsConfig
+{
+	public float CostFactor { get; set; } = 0f;
+
+	public float CostFix { get; set; } = 0f;
+
+	public float ProductionFactor { get; set; } = 0f;
+
+	public float ProductionFix { get; set; } = 0f;
+
+	public float ProductionEfficiency { get; set; } = 1f;
+
+	public float ProdTimeFix { get; set; } = 0f;
+
+	public float FreeProdThreshold { get; set; } = 0f;
+
+	public float DoubleProdThreshold { get; set; } = 0f;
+
+	public WorkshopTechnologyEffectsConfig(GameManagers gameManagers, string buildingType)
+		: base(gameManagers, buildingType)
+	{
+		ModifierManager modifierManager = gameManagers.ModifierManager;
+		string[] subKeys = new string[1] { "BuildingType" + buildingType };
+		CostFactor = 1f + modifierManager.GetPercentFloatPayload("ProduceCost", subKeys);
+		CostFix = modifierManager.GetFixedFloatPayload("ProduceCost", subKeys);
+		ProductionFactor = 1f + modifierManager.GetPercentFloatPayload("SingleProductionAmount", subKeys);
+		ProductionFix = modifierManager.GetFixedFloatPayload("SingleProductionAmount", subKeys);
+		ProductionEfficiency = 1f + modifierManager.GetPercentFloatPayload("ProductionEfficiency", subKeys);
+		ProdTimeFix = modifierManager.GetFixedFloatPayload("ProducingTime", subKeys);
+		FreeProdThreshold = 0f * (1f + modifierManager.GetPercentFloatPayload("FreeProduceChance", subKeys)) + modifierManager.GetFixedFloatPayload("FreeProduceChance", subKeys);
+		DoubleProdThreshold = 0f * (1f + modifierManager.GetPercentFloatPayload("Alchemy", subKeys)) + modifierManager.GetFixedFloatPayload("Alchemy", subKeys);
+	}
+}
