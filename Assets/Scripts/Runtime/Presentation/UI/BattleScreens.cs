@@ -37,6 +37,14 @@ namespace Meowblade
 
         public void Tick(float deltaTime)
         {
+            foreach (SpineCharacterAnimator previewAnimator in _heroPreviewAnimators.Values)
+            {
+                if (previewAnimator != null)
+                {
+                    previewAnimator.Tick(deltaTime, 1f);
+                }
+            }
+
             _refreshTimer -= deltaTime;
             if (_refreshTimer <= 0f)
             {
