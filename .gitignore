@@ -110,3 +110,7 @@ Desktop.ini
 /TextToolDatas/
 /HubOpen.log
 /Packages/com.unity.ide.cursor-master/
+
+# UnityCowork local data (do not commit)
+.unitycowork/
+.superpowers/
