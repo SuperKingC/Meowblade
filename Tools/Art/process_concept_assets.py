@@ -1,9 +1,11 @@
-"""Build temporary runtime art from the approved Meowblade concept sheets.
+"""Build art derivatives from the approved Meowblade concept sheets.
 
 The generated files are derivatives for the playable prototype. Source concept
-art remains untouched under Assets/Art/Concept/VisualDirection.
+art remains untouched.
 """
 
+import argparse
+import json
 from collections import deque
 from pathlib import Path
 
@@ -15,11 +17,30 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 CONCEPT_ROOT = PROJECT_ROOT / "Assets" / "Art" / "Concept" / "VisualDirection"
 RUNTIME_ROOT = PROJECT_ROOT / "Assets" / "Resources" / "Art"
 PREVIEW_ROOT = PROJECT_ROOT / "Assets" / "Art" / "Production" / "Preview"
+SPINE_READY_ROOT = PROJECT_ROOT / "Assets" / "Art" / "Production" / "SpineReady"
 
 HERO_SHEET = CONCEPT_ROOT / "art_concept_heroes_lineup_v01.png"
+SPINE_READY_HERO_SHEET = PROJECT_ROOT / "Assets" / "Art" / "art_master_heroes_lineup_v01.png"
 HOME_SHEET = CONCEPT_ROOT / "art_concept_home_workshop_v01.png"
 BATTLE_SHEET = CONCEPT_ROOT / "art_concept_battle_alley_v01.png"
 UI_SHEET = CONCEPT_ROOT / "art_concept_ui_styleboard_v01.png"
+
+SPINE_LAYER_NAMES = (
+    "body",
+    "head",
+    "arm_front",
+    "arm_back",
+    "weapon",
+    "equipment_front",
+    "equipment_back",
+    "tail",
+    "effect_anchor",
+)
+SPINE_HERO_SPECS = (
+    ("cardboard_knight", (90, 150, 620, 835)),
+    ("fish_hunter", (585, 165, 1030, 835)),
+    ("yarn_mage", (1080, 135, 1605, 835)),
+)
 
 
 def ensure_directories() -> None:
@@ -131,6 +152,26 @@ def extract_paper_sticker(source: Image.Image, box: tuple[int, int, int, int], o
     canvas = Image.new("RGBA", (output_size, output_size), (0, 0, 0, 0))
     canvas.alpha_composite(resized, ((output_size - resized.width) // 2, output_size - padding - resized.height))
     return canvas
+
+
+def validate_alpha_width(
+    image: Image.Image,
+    hero_name: str,
+    minimum_ratio: float = 0.55,
+) -> tuple[int, int, int, int]:
+    """Reject crops whose extracted alpha is too narrow for reliable rigging."""
+    alpha_bbox = image.getchannel("A").getbbox()
+    if alpha_bbox is None:
+        raise ValueError(f"{hero_name} full-body layer has no alpha pixels")
+
+    alpha_width = alpha_bbox[2] - alpha_bbox[0]
+    alpha_ratio = alpha_width / image.width
+    if alpha_ratio < minimum_ratio:
+        raise ValueError(
+            f"{hero_name} alpha width {alpha_width}px is {alpha_ratio:.1%} of "
+            f"crop width {image.width}px; minimum is {minimum_ratio:.0%}"
+        )
+    return alpha_bbox
 
 
 def circle_crop(source: Image.Image, box: tuple[int, int, int, int], output_size=512) -> Image.Image:
@@ -263,7 +304,87 @@ def build_preview(paths: list[Path]) -> Path:
     return output
 
 
-def main() -> None:
+def build_spine_ready_preview(paths: list[Path]) -> Path:
+    card_size = (560, 720)
+    margin = 32
+    sheet = Image.new(
+        "RGB",
+        (len(paths) * card_size[0] + (len(paths) + 1) * margin, card_size[1] + margin * 2),
+        (34, 29, 35),
+    )
+    draw = ImageDraw.Draw(sheet)
+    for index, path in enumerate(paths):
+        image = Image.open(path).convert("RGBA")
+        thumb = ImageOps.contain(image, (card_size[0] - 48, card_size[1] - 88), Image.Resampling.LANCZOS)
+        card = Image.new("RGBA", card_size, (225, 211, 180, 255))
+        x = (card_size[0] - thumb.width) // 2
+        y = 20 + (card_size[1] - 72 - thumb.height) // 2
+        card.alpha_composite(thumb, (x, y))
+        label = path.parent.name.replace("_", " ")
+        draw_x = margin + index * (card_size[0] + margin)
+        sheet.paste(card.convert("RGB"), (draw_x, margin))
+        draw.text((draw_x + 24, margin + card_size[1] - 48), label, fill=(44, 34, 35))
+
+    output = SPINE_READY_ROOT / "spine_ready_preview_v01.png"
+    save_png(sheet, output)
+    return output
+
+
+def build_spine_ready_layers() -> list[Path]:
+    if not SPINE_READY_HERO_SHEET.is_file():
+        raise FileNotFoundError(f"Approved Spine-ready source is missing: {SPINE_READY_HERO_SHEET}")
+
+    source = Image.open(SPINE_READY_HERO_SHEET).convert("RGB")
+    manifest: dict[str, object] = {
+        "version": 1,
+        "source": SPINE_READY_HERO_SHEET.relative_to(PROJECT_ROOT).as_posix(),
+        "layer_names": list(SPINE_LAYER_NAMES),
+        "heroes": {},
+    }
+    outputs: list[Path] = []
+
+    for hero_name, crop_box in SPINE_HERO_SPECS:
+        image = extract_paper_sticker(source, crop_box, output_size=1024).convert("RGBA")
+        alpha_bbox = image.getchannel("A").getbbox()
+        if alpha_bbox is None:
+            raise ValueError(f"{hero_name} full-body layer has no alpha pixels")
+        if hero_name == "fish_hunter":
+            alpha_bbox = validate_alpha_width(image, hero_name)
+        if image.width > 2048 or image.height > 2048:
+            raise ValueError(f"{hero_name} exceeds the 2048x2048 Spine-ready limit: {image.size}")
+
+        hero_root = SPINE_READY_ROOT / hero_name
+        output = hero_root / "full_body.png"
+        save_png(image, output)
+        outputs.append(output)
+
+        relative_root = hero_root.relative_to(SPINE_READY_ROOT).as_posix()
+        relative_image = output.relative_to(SPINE_READY_ROOT).as_posix()
+        hero_manifest: dict[str, object] = {
+            "root": relative_root,
+            "source_crop": list(crop_box),
+            "output_dimensions": [image.width, image.height],
+            "alpha_bbox": list(alpha_bbox),
+        }
+        for layer_name in SPINE_LAYER_NAMES:
+            hero_manifest[layer_name] = {
+                "path": relative_image,
+                "shared": True,
+            }
+        manifest["heroes"][hero_name] = hero_manifest
+
+    preview = build_spine_ready_preview(outputs)
+    manifest_path = SPINE_READY_ROOT / "hero_layer_manifest.json"
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    return [*outputs, preview, manifest_path]
+
+
+def build_runtime_assets() -> None:
     ensure_directories()
     generated = []
     generated.extend(build_backgrounds())
@@ -277,6 +398,28 @@ def main() -> None:
     for path in generated:
         print(path.relative_to(PROJECT_ROOT))
     print(preview.relative_to(PROJECT_ROOT))
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--spine-ready",
+        action="store_true",
+        help="Generate only the deterministic Spine-ready hero layer set.",
+    )
+    return parser.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+    if args.spine_ready:
+        generated = build_spine_ready_layers()
+        print(f"Generated {len(SPINE_HERO_SPECS)} Spine-ready hero layers")
+        for path in generated:
+            print(path.relative_to(PROJECT_ROOT))
+        return
+
+    build_runtime_assets()
 
 
 if __name__ == "__main__":

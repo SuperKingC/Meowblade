@@ -1,0 +1,182 @@
+{
+  "heroes": {
+    "cardboard_knight": {
+      "alpha_bbox": [
+        162,
+        56,
+        862,
+        968
+      ],
+      "arm_back": {
+        "path": "cardboard_knight/full_body.png",
+        "shared": true
+      },
+      "arm_front": {
+        "path": "cardboard_knight/full_body.png",
+        "shared": true
+      },
+      "body": {
+        "path": "cardboard_knight/full_body.png",
+        "shared": true
+      },
+      "effect_anchor": {
+        "path": "cardboard_knight/full_body.png",
+        "shared": true
+      },
+      "equipment_back": {
+        "path": "cardboard_knight/full_body.png",
+        "shared": true
+      },
+      "equipment_front": {
+        "path": "cardboard_knight/full_body.png",
+        "shared": true
+      },
+      "head": {
+        "path": "cardboard_knight/full_body.png",
+        "shared": true
+      },
+      "output_dimensions": [
+        1024,
+        1024
+      ],
+      "root": "cardboard_knight",
+      "source_crop": [
+        90,
+        150,
+        620,
+        835
+      ],
+      "tail": {
+        "path": "cardboard_knight/full_body.png",
+        "shared": true
+      },
+      "weapon": {
+        "path": "cardboard_knight/full_body.png",
+        "shared": true
+      }
+    },
+    "fish_hunter": {
+      "alpha_bbox": [
+        56,
+        241,
+        968,
+        968
+      ],
+      "arm_back": {
+        "path": "fish_hunter/full_body.png",
+        "shared": true
+      },
+      "arm_front": {
+        "path": "fish_hunter/full_body.png",
+        "shared": true
+      },
+      "body": {
+        "path": "fish_hunter/full_body.png",
+        "shared": true
+      },
+      "effect_anchor": {
+        "path": "fish_hunter/full_body.png",
+        "shared": true
+      },
+      "equipment_back": {
+        "path": "fish_hunter/full_body.png",
+        "shared": true
+      },
+      "equipment_front": {
+        "path": "fish_hunter/full_body.png",
+        "shared": true
+      },
+      "head": {
+        "path": "fish_hunter/full_body.png",
+        "shared": true
+      },
+      "output_dimensions": [
+        1024,
+        1024
+      ],
+      "root": "fish_hunter",
+      "source_crop": [
+        585,
+        165,
+        1030,
+        835
+      ],
+      "tail": {
+        "path": "fish_hunter/full_body.png",
+        "shared": true
+      },
+      "weapon": {
+        "path": "fish_hunter/full_body.png",
+        "shared": true
+      }
+    },
+    "yarn_mage": {
+      "alpha_bbox": [
+        126,
+        56,
+        898,
+        968
+      ],
+      "arm_back": {
+        "path": "yarn_mage/full_body.png",
+        "shared": true
+      },
+      "arm_front": {
+        "path": "yarn_mage/full_body.png",
+        "shared": true
+      },
+      "body": {
+        "path": "yarn_mage/full_body.png",
+        "shared": true
+      },
+      "effect_anchor": {
+        "path": "yarn_mage/full_body.png",
+        "shared": true
+      },
+      "equipment_back": {
+        "path": "yarn_mage/full_body.png",
+        "shared": true
+      },
+      "equipment_front": {
+        "path": "yarn_mage/full_body.png",
+        "shared": true
+      },
+      "head": {
+        "path": "yarn_mage/full_body.png",
+        "shared": true
+      },
+      "output_dimensions": [
+        1024,
+        1024
+      ],
+      "root": "yarn_mage",
+      "source_crop": [
+        1080,
+        135,
+        1605,
+        835
+      ],
+      "tail": {
+        "path": "yarn_mage/full_body.png",
+        "shared": true
+      },
+      "weapon": {
+        "path": "yarn_mage/full_body.png",
+        "shared": true
+      }
+    }
+  },
+  "layer_names": [
+    "body",
+    "head",
+    "arm_front",
+    "arm_back",
+    "weapon",
+    "equipment_front",
+    "equipment_back",
+    "tail",
+    "effect_anchor"
+  ],
+  "source": "Assets/Art/art_master_heroes_lineup_v01.png",
+  "version": 1
+}
