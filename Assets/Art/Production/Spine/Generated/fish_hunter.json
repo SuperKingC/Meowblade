@@ -1,0 +1,646 @@
+{
+  "skeleton": {
+    "spine": "4.3.23",
+    "x": -512.0,
+    "y": -512.0,
+    "width": 1024,
+    "height": 1024,
+    "images": "./Images/"
+  },
+  "bones": [
+    {
+      "name": "root"
+    },
+    {
+      "name": "body",
+      "parent": "root"
+    },
+    {
+      "name": "head",
+      "parent": "body"
+    },
+    {
+      "name": "arm_back",
+      "parent": "body"
+    },
+    {
+      "name": "arm_front",
+      "parent": "body"
+    },
+    {
+      "name": "weapon",
+      "parent": "body"
+    },
+    {
+      "name": "tail",
+      "parent": "body"
+    },
+    {
+      "name": "effects",
+      "parent": "root"
+    }
+  ],
+  "slots": [
+    {
+      "name": "equipment_back",
+      "bone": "body",
+      "attachment": "equipment_back"
+    },
+    {
+      "name": "tail",
+      "bone": "tail",
+      "attachment": "tail"
+    },
+    {
+      "name": "body",
+      "bone": "body",
+      "attachment": "body"
+    },
+    {
+      "name": "arm_back",
+      "bone": "arm_back",
+      "attachment": "arm_back"
+    },
+    {
+      "name": "arm_front",
+      "bone": "arm_front",
+      "attachment": "arm_front"
+    },
+    {
+      "name": "head",
+      "bone": "head",
+      "attachment": "head"
+    },
+    {
+      "name": "weapon",
+      "bone": "weapon",
+      "attachment": "weapon"
+    },
+    {
+      "name": "equipment_front",
+      "bone": "body",
+      "attachment": "equipment_front"
+    },
+    {
+      "name": "effects",
+      "bone": "effects"
+    }
+  ],
+  "skins": [
+    {
+      "name": "default",
+      "attachments": {
+        "equipment_back": {
+          "equipment_back": {
+            "path": "fish_hunter/full_body",
+            "width": 1024,
+            "height": 1024,
+            "name": "equipment_back_shared_full_body"
+          }
+        },
+        "tail": {
+          "tail": {
+            "path": "fish_hunter/full_body",
+            "width": 1024,
+            "height": 1024,
+            "name": "tail_shared_full_body"
+          }
+        },
+        "body": {
+          "body": {
+            "path": "fish_hunter/full_body",
+            "width": 1024,
+            "height": 1024,
+            "name": "body_shared_full_body"
+          }
+        },
+        "arm_back": {
+          "arm_back": {
+            "path": "fish_hunter/full_body",
+            "width": 1024,
+            "height": 1024,
+            "name": "arm_back_shared_full_body"
+          }
+        },
+        "arm_front": {
+          "arm_front": {
+            "path": "fish_hunter/full_body",
+            "width": 1024,
+            "height": 1024,
+            "name": "arm_front_shared_full_body"
+          }
+        },
+        "head": {
+          "head": {
+            "path": "fish_hunter/full_body",
+            "width": 1024,
+            "height": 1024,
+            "name": "head_shared_full_body"
+          }
+        },
+        "weapon": {
+          "weapon": {
+            "path": "fish_hunter/full_body",
+            "width": 1024,
+            "height": 1024,
+            "name": "weapon_shared_full_body"
+          }
+        },
+        "equipment_front": {
+          "equipment_front": {
+            "path": "fish_hunter/full_body",
+            "width": 1024,
+            "height": 1024,
+            "name": "equipment_front_shared_full_body"
+          }
+        },
+        "effects": {
+          "shield_anchor": {
+            "type": "point",
+            "name": "shield_anchor"
+          },
+          "fishbone_anchor": {
+            "type": "point",
+            "name": "fishbone_anchor"
+          },
+          "yarn_anchor": {
+            "type": "point",
+            "name": "yarn_anchor"
+          },
+          "hit_anchor": {
+            "type": "point",
+            "name": "hit_anchor"
+          }
+        }
+      }
+    }
+  ],
+  "animations": {
+    "idle": {
+      "bones": {
+        "body": {
+          "translate": [
+            {
+              "y": 0
+            },
+            {
+              "time": 1.0,
+              "y": 8
+            },
+            {
+              "time": 2.0,
+              "y": 0
+            }
+          ],
+          "scale": [
+            {
+              "x": 1,
+              "y": 1
+            },
+            {
+              "time": 1.0,
+              "x": 1.015,
+              "y": 0.985
+            },
+            {
+              "time": 2.0,
+              "x": 1,
+              "y": 1
+            }
+          ]
+        },
+        "head": {
+          "rotate": [
+            {
+              "value": -2
+            },
+            {
+              "time": 1.0,
+              "value": 2
+            },
+            {
+              "time": 2.0,
+              "value": -2
+            }
+          ]
+        }
+      }
+    },
+    "move": {
+      "bones": {
+        "body": {
+          "translate": [
+            {
+              "y": 0
+            },
+            {
+              "time": 0.15,
+              "y": 10
+            },
+            {
+              "time": 0.3,
+              "y": 0
+            },
+            {
+              "time": 0.45,
+              "y": 8
+            },
+            {
+              "time": 0.6,
+              "y": 0
+            }
+          ],
+          "rotate": [
+            {
+              "value": -4
+            },
+            {
+              "time": 0.3,
+              "value": 4
+            },
+            {
+              "time": 0.6,
+              "value": -4
+            }
+          ]
+        }
+      }
+    },
+    "attack": {
+      "bones": {
+        "arm_front": {
+          "rotate": [
+            {
+              "value": 0
+            },
+            {
+              "time": 0.12,
+              "value": -18
+            },
+            {
+              "time": 0.24,
+              "value": 24
+            },
+            {
+              "time": 0.45,
+              "value": 0
+            }
+          ]
+        },
+        "weapon": {
+          "rotate": [
+            {
+              "value": 0
+            },
+            {
+              "time": 0.12,
+              "value": -30
+            },
+            {
+              "time": 0.24,
+              "value": 42
+            },
+            {
+              "time": 0.45,
+              "value": 0
+            }
+          ]
+        },
+        "body": {
+          "translate": [
+            {
+              "x": 0
+            },
+            {
+              "time": 0.12,
+              "x": -10
+            },
+            {
+              "time": 0.24,
+              "x": 20
+            },
+            {
+              "time": 0.45,
+              "x": 0
+            }
+          ]
+        }
+      }
+    },
+    "skill": {
+      "bones": {
+        "arm_front": {
+          "rotate": [
+            {
+              "value": 0
+            },
+            {
+              "time": 0.25,
+              "value": -28
+            },
+            {
+              "time": 0.55,
+              "value": 20
+            },
+            {
+              "time": 0.8,
+              "value": 0
+            }
+          ]
+        },
+        "effects": {
+          "scale": [
+            {
+              "x": 0.5,
+              "y": 0.5
+            },
+            {
+              "time": 0.4,
+              "x": 1.25,
+              "y": 1.25
+            },
+            {
+              "time": 0.8,
+              "x": 1,
+              "y": 1
+            }
+          ]
+        },
+        "body": {
+          "translate": [
+            {
+              "y": 0
+            },
+            {
+              "time": 0.4,
+              "y": 12
+            },
+            {
+              "time": 0.8,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "hit": {
+      "bones": {
+        "body": {
+          "translate": [
+            {
+              "x": 0
+            },
+            {
+              "time": 0.08,
+              "x": -22
+            },
+            {
+              "time": 0.25,
+              "x": 0
+            }
+          ],
+          "rotate": [
+            {
+              "value": 0
+            },
+            {
+              "time": 0.08,
+              "value": -6
+            },
+            {
+              "time": 0.25,
+              "value": 0
+            }
+          ]
+        }
+      }
+    },
+    "retreat": {
+      "bones": {
+        "body": {
+          "translate": [
+            {
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.3,
+              "x": -18,
+              "y": -16
+            },
+            {
+              "time": 0.6,
+              "x": -48,
+              "y": -24
+            }
+          ],
+          "scale": [
+            {
+              "x": 1,
+              "y": 1
+            },
+            {
+              "time": 0.3,
+              "x": 1.05,
+              "y": 0.9
+            },
+            {
+              "time": 0.6,
+              "x": 0.95,
+              "y": 0.82
+            }
+          ]
+        }
+      },
+      "slots": {
+        "equipment_back": {
+          "rgba": [
+            {
+              "color": "ffffffff"
+            },
+            {
+              "time": 0.6,
+              "color": "ffffff00"
+            }
+          ]
+        },
+        "tail": {
+          "rgba": [
+            {
+              "color": "ffffffff"
+            },
+            {
+              "time": 0.6,
+              "color": "ffffff00"
+            }
+          ]
+        },
+        "body": {
+          "rgba": [
+            {
+              "color": "ffffffff"
+            },
+            {
+              "time": 0.6,
+              "color": "ffffff00"
+            }
+          ]
+        },
+        "arm_back": {
+          "rgba": [
+            {
+              "color": "ffffffff"
+            },
+            {
+              "time": 0.6,
+              "color": "ffffff00"
+            }
+          ]
+        },
+        "arm_front": {
+          "rgba": [
+            {
+              "color": "ffffffff"
+            },
+            {
+              "time": 0.6,
+              "color": "ffffff00"
+            }
+          ]
+        },
+        "head": {
+          "rgba": [
+            {
+              "color": "ffffffff"
+            },
+            {
+              "time": 0.6,
+              "color": "ffffff00"
+            }
+          ]
+        },
+        "weapon": {
+          "rgba": [
+            {
+              "color": "ffffffff"
+            },
+            {
+              "time": 0.6,
+              "color": "ffffff00"
+            }
+          ]
+        },
+        "equipment_front": {
+          "rgba": [
+            {
+              "color": "ffffffff"
+            },
+            {
+              "time": 0.6,
+              "color": "ffffff00"
+            }
+          ]
+        }
+      }
+    },
+    "victory": {
+      "bones": {
+        "body": {
+          "translate": [
+            {
+              "y": 0
+            },
+            {
+              "time": 0.3,
+              "y": 18
+            },
+            {
+              "time": 0.6,
+              "y": 0
+            },
+            {
+              "time": 0.9,
+              "y": 14
+            },
+            {
+              "time": 1.2,
+              "y": 0
+            }
+          ],
+          "scale": [
+            {
+              "x": 1,
+              "y": 1
+            },
+            {
+              "time": 0.3,
+              "x": 1.04,
+              "y": 0.96
+            },
+            {
+              "time": 0.6,
+              "x": 1,
+              "y": 1
+            },
+            {
+              "time": 0.9,
+              "x": 1.03,
+              "y": 0.97
+            },
+            {
+              "time": 1.2,
+              "x": 1,
+              "y": 1
+            }
+          ]
+        },
+        "head": {
+          "rotate": [
+            {
+              "value": -4
+            },
+            {
+              "time": 0.3,
+              "value": 5
+            },
+            {
+              "time": 0.6,
+              "value": -4
+            },
+            {
+              "time": 0.9,
+              "value": 5
+            },
+            {
+              "time": 1.2,
+              "value": -4
+            }
+          ]
+        },
+        "arm_front": {
+          "rotate": [
+            {
+              "value": 0
+            },
+            {
+              "time": 0.3,
+              "value": 16
+            },
+            {
+              "time": 0.6,
+              "value": 0
+            },
+            {
+              "time": 0.9,
+              "value": 16
+            },
+            {
+              "time": 1.2,
+              "value": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}
