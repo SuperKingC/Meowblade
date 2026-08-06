@@ -80,6 +80,7 @@ namespace Meowblade.Tests
             }
         }
 
+        [TestCase(CharacterAnimationState.Retreat, true)]
         [TestCase(CharacterAnimationState.Down, true)]
         [TestCase(CharacterAnimationState.Victory, true)]
         [TestCase(CharacterAnimationState.Idle, false)]
@@ -125,6 +126,61 @@ namespace Meowblade.Tests
             string expected)
         {
             Assert.That(SpineCharacterAnimator.AnimationNameFor(state), Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void SkillSuppressesAttackOnSameBatch()
+        {
+            Assert.That(
+                SpineCharacterAnimator.CanTransition(
+                    CharacterAnimationState.Skill,
+                    CharacterAnimationState.Attack),
+                Is.False);
+        }
+
+        [Test]
+        public void HitCanInterruptAttack()
+        {
+            Assert.That(
+                SpineCharacterAnimator.CanTransition(
+                    CharacterAnimationState.Attack,
+                    CharacterAnimationState.Hit),
+                Is.True);
+        }
+
+        [Test]
+        public void RetreatTerminatesFurtherCommands()
+        {
+            var model = new SpineCharacterAnimator.StateModel();
+
+            Assert.That(model.Play(CharacterAnimationState.Retreat, 0.5f), Is.True);
+            Assert.That(model.IsTerminated, Is.True);
+            Assert.That(model.Play(CharacterAnimationState.Hit, 0.5f), Is.False);
+            Assert.That(model.CurrentState, Is.EqualTo(CharacterAnimationState.Retreat));
+        }
+
+        [Test]
+        public void OneShotReturnsToMoveWhenBaseStateIsMove()
+        {
+            var model = new SpineCharacterAnimator.StateModel();
+            model.SetBaseState(CharacterAnimationState.Move);
+
+            Assert.That(model.Play(CharacterAnimationState.Attack, 0.5f), Is.True);
+            Assert.That(model.Tick(0.25f, 2f), Is.True);
+            Assert.That(model.CurrentState, Is.EqualTo(CharacterAnimationState.Move));
+        }
+
+        [Test]
+        public void ResetClearsTerminationAndRestoresIdleState()
+        {
+            var model = new SpineCharacterAnimator.StateModel();
+            model.Play(CharacterAnimationState.Down, 0.5f);
+
+            model.Reset();
+
+            Assert.That(model.IsTerminated, Is.False);
+            Assert.That(model.BaseState, Is.EqualTo(CharacterAnimationState.Idle));
+            Assert.That(model.CurrentState, Is.EqualTo(CharacterAnimationState.Idle));
         }
     }
 }
