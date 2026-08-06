@@ -3,6 +3,8 @@
   "rootNamespace": "Meowblade.Tests",
   "references": [
     "Meowblade.Runtime",
+    "spine-csharp",
+    "spine-unity",
     "UnityEngine.TestRunner",
     "UnityEditor.TestRunner"
   ],
