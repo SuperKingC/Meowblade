@@ -3,7 +3,8 @@
   "rootNamespace": "Meowblade",
   "references": [
     "Unity.ugui",
-    "spine-unity"
+    "spine-unity",
+    "spine-csharp"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
