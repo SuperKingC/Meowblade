@@ -23,6 +23,13 @@ namespace Meowblade
             ResetVisualState();
         }
 
+        public void Configure(SkeletonGraphic graphic, Image fallback)
+        {
+            skeletonGraphic = graphic;
+            fallbackImage = fallback;
+            ResetVisualState();
+        }
+
         public void Play(CharacterAnimationCommand command)
         {
             CharacterAnimationState state = ReadCommandValue(

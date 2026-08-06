@@ -1,0 +1,7 @@
+cardboard_knight.png
+size:704,916
+filter:Linear,Linear
+pma:true
+cardboard_knight/full_body
+bounds:2,2,700,912
+offsets:162,56,1024,1024

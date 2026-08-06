@@ -219,6 +219,7 @@ namespace Meowblade
         private sealed class UnitView
         {
             public RectTransform Root;
+            public RectTransform MotionRoot;
             public Text Label;
             public Text State;
             public Image HpFill;
@@ -509,6 +510,7 @@ namespace Meowblade
             float width = unit.IsBoss ? 160f : unit.IsHero ? 126f : 94f;
             float height = unit.IsBoss ? 154f : unit.IsHero ? 130f : 100f;
             RectTransform root = UiFactory.CreateRect(_battlefield, "Unit_" + unit.Id, MapBattlePosition(unit.Position), new Vector2(width, height));
+            root.gameObject.name = "UnitRoot_" + unit.Id;
             CanvasGroup group = root.gameObject.AddComponent<CanvasGroup>();
 
             Sprite unitSprite = unit.IsPlayer
@@ -517,9 +519,16 @@ namespace Meowblade
 
             float tokenSize = unit.IsBoss ? 126f : 84f;
             Image art;
+            ICharacterAnimator animator = null;
             if (unit.IsHero)
             {
-                art = UiFactory.CreateImage(root, "Art", new Vector2(0f, 10f), new Vector2(138f, 150f), unitSprite, Color.white);
+                animator = SpineHeroFactory.CreateBattleCharacter(
+                    root,
+                    unit.OwnerHeroId,
+                    unitSprite,
+                    new Vector2(138f, 150f));
+                animator.SetBaseState(CharacterAnimationState.Idle);
+                art = null;
             }
             else
             {
@@ -531,7 +540,7 @@ namespace Meowblade
                 art = UiFactory.CreateImage(inset, "Art", Vector2.zero, new Vector2(tokenSize, tokenSize), unitSprite, Color.white);
             }
 
-            if (art.sprite == null)
+            if (art != null && art.sprite == null)
             {
                 Color color = unit.IsPlayer ? GameBalance.HeroColor(unit.OwnerHeroId) : unit.IsBoss ? new Color(0.70f, 0.20f, 0.17f) : new Color(0.52f, 0.31f, 0.24f);
                 string glyph = unit.IsPlayer ? "猫" : unit.IsBoss ? "王" : "鼠";
@@ -552,7 +561,7 @@ namespace Meowblade
             view.HpFill = hpFill;
             view.ShieldFill = shieldFill;
             view.CanvasGroup = group;
-            view.Animator = root.GetComponent<ICharacterAnimator>();
+            view.Animator = animator ?? root.GetComponent<ICharacterAnimator>();
             return view;
         }
 

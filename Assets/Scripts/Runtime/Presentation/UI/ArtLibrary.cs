@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Spine.Unity;
 using UnityEngine;
 
 namespace Meowblade
@@ -32,6 +33,14 @@ namespace Meowblade
             "Art/UI/Resources/resource_dried_fish_v01",
             "Art/UI/Resources/resource_mystic_part_v01"
         };
+
+        private static readonly Dictionary<HeroId, string> HeroSkeletonPaths =
+            new Dictionary<HeroId, string>
+            {
+                { HeroId.CardboardKnight, "Art/SpineHeroes/CardboardKnight/cardboard_knight_SkeletonData" },
+                { HeroId.FishHunter, "Art/SpineHeroes/FishHunter/fish_hunter_SkeletonData" },
+                { HeroId.YarnMage, "Art/SpineHeroes/YarnMage/yarn_mage_SkeletonData" }
+            };
 
         public static Sprite HomeBackground
         {
@@ -74,6 +83,17 @@ namespace Meowblade
                 case HeroId.YarnMage: return Load("Art/Characters/hero_yarn_mage_temp_v01");
                 default: return null;
             }
+        }
+
+        public static SkeletonDataAsset HeroSkeletonData(HeroId hero)
+        {
+            string resourcePath;
+            if (!HeroSkeletonPaths.TryGetValue(hero, out resourcePath))
+            {
+                return null;
+            }
+
+            return Resources.Load<SkeletonDataAsset>(resourcePath);
         }
 
         public static Sprite HeroPortrait(HeroId hero)
