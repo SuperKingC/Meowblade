@@ -79,5 +79,52 @@ namespace Meowblade.Tests
                 }
             }
         }
+
+        [TestCase(CharacterAnimationState.Down, true)]
+        [TestCase(CharacterAnimationState.Victory, true)]
+        [TestCase(CharacterAnimationState.Idle, false)]
+        [TestCase(CharacterAnimationState.Attack, false)]
+        public void IsTerminalState_OnlyLocksTerminalAnimations(
+            CharacterAnimationState state,
+            bool expected)
+        {
+            Assert.That(SpineCharacterAnimator.IsTerminalState(state), Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void CanTransition_RejectsLowerPriorityAndTerminalInterruptions()
+        {
+            Assert.That(
+                SpineCharacterAnimator.CanTransition(
+                    CharacterAnimationState.Attack,
+                    CharacterAnimationState.Idle),
+                Is.False);
+            Assert.That(
+                SpineCharacterAnimator.CanTransition(
+                    CharacterAnimationState.Idle,
+                    CharacterAnimationState.Attack),
+                Is.True);
+            Assert.That(
+                SpineCharacterAnimator.CanTransition(
+                    CharacterAnimationState.Down,
+                    CharacterAnimationState.Hit),
+                Is.False);
+            Assert.That(
+                SpineCharacterAnimator.CanTransition(
+                    CharacterAnimationState.Down,
+                    CharacterAnimationState.Down),
+                Is.True);
+        }
+
+        [TestCase(CharacterAnimationState.Idle, "idle")]
+        [TestCase(CharacterAnimationState.Move, "move")]
+        [TestCase(CharacterAnimationState.Attack, "attack")]
+        [TestCase(CharacterAnimationState.Selected, "selected")]
+        public void AnimationNameFor_UsesLowerCaseStateNames(
+            CharacterAnimationState state,
+            string expected)
+        {
+            Assert.That(SpineCharacterAnimator.AnimationNameFor(state), Is.EqualTo(expected));
+        }
     }
 }

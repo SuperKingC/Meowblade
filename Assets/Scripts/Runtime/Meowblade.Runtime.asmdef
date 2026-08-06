@@ -2,7 +2,8 @@
   "name": "Meowblade.Runtime",
   "rootNamespace": "Meowblade",
   "references": [
-    "Unity.ugui"
+    "Unity.ugui",
+    "spine-unity"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
