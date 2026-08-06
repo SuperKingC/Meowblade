@@ -224,6 +224,7 @@ namespace Meowblade
             public Image HpFill;
             public Image ShieldFill;
             public CanvasGroup CanvasGroup;
+            public ICharacterAnimator Animator;
         }
 
         private readonly AppBootstrap _app;
@@ -231,7 +232,9 @@ namespace Meowblade
         private readonly StageId _stageId;
         private readonly BattleSimulation _simulation;
         private readonly Dictionary<int, UnitView> _unitViews = new Dictionary<int, UnitView>();
+        private readonly Dictionary<int, ICharacterAnimator> _animators = new Dictionary<int, ICharacterAnimator>();
         private readonly List<string> _logLines = new List<string>();
+        private readonly BattleAnimationBridge _animationBridge = new BattleAnimationBridge();
 
         private RectTransform _battlefield;
         private Image _battlefieldImage;
@@ -284,6 +287,7 @@ namespace Meowblade
             ProcessEvents();
             RefreshHud();
             RefreshUnitViews();
+            _animationBridge.UpdateBaseStates(_simulation.Units, _animators);
 
             if (_simulation.IsFinished && !_resultShown)
             {
@@ -384,6 +388,7 @@ namespace Meowblade
         private void ProcessEvents()
         {
             List<BattleEvent> events = _simulation.DrainEvents();
+            _animationBridge.ProcessBatch(events, _animators, _simulation.Result, _simulation.IsFinished, _simulation.Units);
             for (int i = 0; i < events.Count; i++)
             {
                 BattleEvent battleEvent = events[i];
@@ -479,6 +484,10 @@ namespace Meowblade
                 {
                     view = CreateUnitView(unit);
                     _unitViews[unit.Id] = view;
+                    if (view.Animator != null)
+                    {
+                        _animators[unit.Id] = view.Animator;
+                    }
                 }
 
                 Vector2 mapped = MapBattlePosition(unit.Position);
@@ -543,6 +552,7 @@ namespace Meowblade
             view.HpFill = hpFill;
             view.ShieldFill = shieldFill;
             view.CanvasGroup = group;
+            view.Animator = root.GetComponent<ICharacterAnimator>();
             return view;
         }
 
