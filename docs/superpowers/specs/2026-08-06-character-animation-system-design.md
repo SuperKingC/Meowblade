@@ -230,7 +230,7 @@ Retreat / Down
 3. 处理 `Skill`：来源播放角色专属 `Skill`，目标存在时将效果锚定到目标或目标区域。
 4. 处理 `UnitDown`：英雄与小猫进入 `Retreat`，敌人进入较短的 `Down`。
 5. 处理 `Command`：所有存活我方单位短暂下压并显示蓝色纸箱护盾脉冲。
-6. 处理战斗结束消息：胜利时存活英雄进入 `Victory`；失败时保留已经发生的撤退结果并停止普通循环。
+6. 在 `_simulation.IsFinished` 首次变为 `true` 时读取结构化的 `BattleResult.Victory`：胜利时让存活英雄进入 `Victory`；失败时保留已经发生的撤退结果并停止普通循环。动画不得通过解析本地化日志文字判断胜负。
 
 移动状态不依赖事件。桥接层比较单位上一帧和当前帧的映射位置；位移超过小阈值时设置基础状态为 `Move`，否则设置为 `Idle`。该判断只影响表现，不改变单位位置。
 
@@ -290,8 +290,9 @@ Retreat / Down
 - Unity 批处理编译通过，无 C# 编译错误。
 - `Meowblade/Run Self Checks` 继续通过。
 - `ArtLibrary.ValidateRuntimeAssets` 增加三张新版英雄 Sprite 的加载与最小尺寸检查。
-- 动画状态检查覆盖：优先级、一次性动作恢复、终止状态、`2x` 播放速度、复位和缺失 Profile 降级。
-- 事件桥接检查覆盖：技能批次不额外触发普攻、伤害触发目标受击、UnitDown 终止、Command 群体反馈和胜利状态。
+- 在 `Assets/Tests/EditMode/` 增加动画测试程序集；如果 Unity Test Framework 尚未成为直接依赖，则在 `Packages/manifest.json` 中固定工程当前兼容的 `com.unity.test-framework` 版本。
+- 动画状态 EditMode 测试覆盖：优先级、一次性动作恢复、终止状态、`2x` 播放速度、复位和缺失 Profile 降级。
+- 事件桥接 EditMode 测试覆盖：技能批次不额外触发普攻、伤害触发目标受击、UnitDown 终止、Command 群体反馈，以及通过结构化 `BattleResult` 进入胜利状态。
 
 ### 13.2 运行时验证
 
@@ -325,6 +326,9 @@ Assets/Scripts/Runtime/Presentation/UI/ArtLibrary.cs
 Assets/Scripts/Runtime/Presentation/UI/HomeScreen.cs
 Assets/Scripts/Runtime/Presentation/UI/BattleScreens.cs
 Assets/Scripts/Editor/ProjectTools.cs
+Assets/Tests/EditMode/
+Packages/manifest.json
+Packages/packages-lock.json
 Tools/Art/
 ```
 
