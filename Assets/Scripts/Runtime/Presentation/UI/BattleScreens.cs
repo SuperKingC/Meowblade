@@ -13,6 +13,7 @@ namespace Meowblade
         private readonly Text[] _slotLabels = new Text[6];
         private readonly Dictionary<HeroId, Button> _heroButtons = new Dictionary<HeroId, Button>();
         private readonly Dictionary<HeroId, Text> _heroCardTexts = new Dictionary<HeroId, Text>();
+        private readonly Dictionary<HeroId, SpineCharacterAnimator> _heroPreviewAnimators = new Dictionary<HeroId, SpineCharacterAnimator>();
 
         private StageId _stageId;
         private HeroId _selectedHero = HeroId.CardboardKnight;
@@ -143,6 +144,11 @@ namespace Meowblade
                 Button card = UiFactory.CreateButton(root, "Hero_" + capturedHero, string.Empty, new Vector2(xs[i], -390f), new Vector2(350f, 145f), Color.Lerp(UiPalette.Panel, GameBalance.HeroColor(capturedHero), 0.20f), delegate
                 {
                     _selectedHero = capturedHero;
+                    SpineCharacterAnimator selectedPreview;
+                    if (_heroPreviewAnimators.TryGetValue(capturedHero, out selectedPreview))
+                    {
+                        selectedPreview.Play(CharacterAnimationState.Selected, 0.45f);
+                    }
                     Refresh();
                 }, 20);
                 Text label = card.GetComponentInChildren<Text>();
@@ -152,7 +158,14 @@ namespace Meowblade
                 label.rectTransform.anchoredPosition = new Vector2(45f, 0f);
                 label.rectTransform.sizeDelta = new Vector2(235f, 132f);
                 label.alignment = TextAnchor.MiddleLeft;
-                UiFactory.CreateImage(card.transform, "Portrait", new Vector2(-125f, 0f), new Vector2(105f, 105f), ArtLibrary.HeroPortrait(capturedHero), Color.white);
+                SpineCharacterAnimator preview = SpineHeroFactory.CreateBattleCharacter(
+                    card.transform as RectTransform,
+                    capturedHero,
+                    ArtLibrary.HeroSprite(capturedHero),
+                    new Vector2(112f, 132f));
+                preview.transform.SetSiblingIndex(0);
+                preview.SetBaseState(CharacterAnimationState.Idle);
+                _heroPreviewAnimators[capturedHero] = preview;
             }
         }
 
@@ -187,6 +200,8 @@ namespace Meowblade
                 _heroCardTexts[hero].text = string.Format("  {0}\n  <size=19>{1}</size>\n  <size=18>{2}{3}</size>", GameBalance.HeroName(hero), GameBalance.HeroRole(hero), _session.BuildArmySummary(hero), hero == HeroId.CardboardKnight ? (_session.SaveData.cardboardCapeEquipped ? " · 披风✓" : " · 无披风") : string.Empty);
                 Image image = _heroButtons[hero].GetComponent<Image>();
                 image.color = hero == _selectedHero ? Color.Lerp(GameBalance.HeroColor(hero), Color.white, 0.25f) : Color.Lerp(UiPalette.Panel, GameBalance.HeroColor(hero), 0.20f);
+                SpineCharacterAnimator preview = _heroPreviewAnimators[hero];
+                preview.transform.localScale = hero == _selectedHero ? new Vector3(1.08f, 1.08f, 1f) : Vector3.one;
             }
 
             int readyTotal = 0;

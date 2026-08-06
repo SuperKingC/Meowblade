@@ -143,6 +143,16 @@ namespace Meowblade
             {
                 UiFactory.CreateText(panel, "GlyphFallback", GameBalance.ResourceGlyph(output), new Vector2(0f, 175f), new Vector2(90f, 75f), 52, TextAnchor.MiddleCenter, GameBalance.ResourceColor(output), FontStyle.Bold).raycastTarget = false;
             }
+            HeroId stationHero = station == StationId.Cardboard
+                ? HeroId.CardboardKnight
+                : station == StationId.Fish ? HeroId.FishHunter : HeroId.YarnMage;
+            SpineCharacterAnimator heroPreview = SpineHeroFactory.CreateBattleCharacter(
+                panel,
+                stationHero,
+                ArtLibrary.HeroSprite(stationHero),
+                new Vector2(130f, 175f));
+            heroPreview.transform.SetSiblingIndex(1);
+            heroPreview.SetBaseState(CharacterAnimationState.Idle);
             UiFactory.CreateText(panel, "Name", GameBalance.StationName(station), new Vector2(0f, 73f), new Vector2(280f, 50f), 27, TextAnchor.MiddleCenter, UiPalette.Cream, FontStyle.Bold).raycastTarget = false;
             UiFactory.CreateText(panel, "Action", GameBalance.StationAction(station), new Vector2(0f, 35f), new Vector2(280f, 40f), 18, TextAnchor.MiddleCenter, UiPalette.Muted).raycastTarget = false;
 
