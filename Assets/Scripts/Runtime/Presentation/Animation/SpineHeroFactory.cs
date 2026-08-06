@@ -24,7 +24,10 @@ namespace Meowblade
             SkeletonGraphic graphic = motionObject.AddComponent<SkeletonGraphic>();
             graphic.raycastTarget = false;
             graphic.SkeletonDataAsset = ArtLibrary.HeroSkeletonData(hero);
-            graphic.Initialize(false);
+
+            SkeletonAnimation skeletonAnimation = motionObject.AddComponent<SkeletonAnimation>();
+            graphic.Animation = skeletonAnimation;
+            skeletonAnimation.Initialize(false);
 
             Image fallbackImage = motionObject.AddComponent<Image>();
             fallbackImage.sprite = fallback;
@@ -32,7 +35,7 @@ namespace Meowblade
             fallbackImage.raycastTarget = false;
 
             SpineCharacterAnimator animator = motionObject.AddComponent<SpineCharacterAnimator>();
-            animator.Configure(graphic, fallbackImage);
+            animator.Configure(graphic, skeletonAnimation, fallbackImage);
             return animator;
         }
     }

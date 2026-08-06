@@ -10,6 +10,7 @@ namespace Meowblade
     public sealed class SpineCharacterAnimator : MonoBehaviour, ICharacterAnimator
     {
         [SerializeField] private SkeletonGraphic skeletonGraphic;
+        [SerializeField] private SkeletonAnimation skeletonAnimation;
         [SerializeField] private Image fallbackImage;
 
         private readonly StateModel stateModel = new StateModel();
@@ -23,9 +24,13 @@ namespace Meowblade
             ResetVisualState();
         }
 
-        public void Configure(SkeletonGraphic graphic, Image fallback)
+        public void Configure(
+            SkeletonGraphic graphic,
+            SkeletonAnimation animation,
+            Image fallback)
         {
             skeletonGraphic = graphic;
+            skeletonAnimation = animation;
             fallbackImage = fallback;
             ResetVisualState();
         }
@@ -62,6 +67,10 @@ namespace Meowblade
         public void ResetVisualState()
         {
             stateModel.Reset();
+            if (skeletonAnimation != null)
+            {
+                skeletonAnimation.AnimationState.ClearTracks();
+            }
             ResetGraphic(skeletonGraphic);
             ResetGraphic(fallbackImage);
             ResetTransform(skeletonGraphic != null ? skeletonGraphic.rectTransform : null);
@@ -149,21 +158,24 @@ namespace Meowblade
 
         private bool TryPlaySpineAnimation(string animationName, bool loop)
         {
-            IAnimationStateComponent animationStateComponent = skeletonGraphic;
-            if (animationStateComponent == null ||
-                skeletonGraphic.SkeletonDataAsset == null)
+            if (skeletonAnimation == null || skeletonGraphic == null)
             {
                 return false;
             }
 
-            SkeletonData skeletonData =
-                skeletonGraphic.SkeletonDataAsset.GetSkeletonData(false);
+            Spine.AnimationState animationState = skeletonAnimation.AnimationState;
+            if (animationState == null || skeletonGraphic.SkeletonDataAsset == null)
+            {
+                return false;
+            }
+
+            SkeletonData skeletonData = skeletonGraphic.SkeletonDataAsset.GetSkeletonData(false);
             if (skeletonData == null || skeletonData.FindAnimation(animationName) == null)
             {
                 return false;
             }
 
-            animationStateComponent.AnimationState.SetAnimation(0, animationName, loop);
+            animationState.SetAnimation(0, animationName, loop);
             return true;
         }
 
