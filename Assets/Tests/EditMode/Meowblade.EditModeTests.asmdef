@@ -2,11 +2,11 @@
   "name": "Meowblade.EditModeTests",
   "rootNamespace": "Meowblade.Tests",
   "references": [
+    "UnityEngine.TestRunner",
+    "UnityEditor.TestRunner",
     "Meowblade.Runtime",
     "spine-csharp",
-    "spine-unity",
-    "UnityEngine.TestRunner",
-    "UnityEditor.TestRunner"
+    "spine-unity"
   ],
   "includePlatforms": [
     "Editor"
